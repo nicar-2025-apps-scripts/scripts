@@ -1,0 +1,14 @@
+function archiveSheet() {
+let ss = SpreadsheetApp.getActiveSpreadsheet();
+let sheet = ss.getSheetByName('statewide-scraper'); // the dynamic data we're snapshotting
+let sheetValues = sheet.getDataRange().getValues();
+console. log(sheetValues.length);
+
+let date = new Date();
+date = String(date)
+
+let sheetName = 'statewide-saved-${date}';
+let newSheet = ss.insertSheet(sheetName); // create new dated sheet
+
+newSheet.getRange(1, 1, sheetValues.length, sheetValues[0].length).setValues(sheetValues); // set values of timestamped sheet
+}
